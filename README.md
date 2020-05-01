@@ -19,6 +19,10 @@ Clone the app repository then run the following command to install the app depen
 npm install
 ```
 
+Run the Mysql query in the schema.sql file to initialize and seed the database.
+
+Add your local Mysql database server password in the create connection object in the app.js file
+
 ## Usage
 
 To run the app, use the following command in a terminal.
