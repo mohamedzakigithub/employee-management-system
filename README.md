@@ -39,6 +39,7 @@ The app uses the following node modules.
 
 - mysql
 - inquirer
+- figlet
 
 In addition the app used the following classes as local modules to handle database queries.
 
