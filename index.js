@@ -135,7 +135,6 @@ function viewAll() {
       if (err) throw err;
       console.log("----------------------------------------------------");
       console.table(res);
-      console.log("----------------------------------------------------");
       start();
     }
   );
@@ -159,7 +158,6 @@ async function viewAllByDepartment() {
           if (err) throw err;
           console.log("----------------------------------------------------");
           console.table(res);
-          console.log("----------------------------------------------------");
           start();
         }
       );
@@ -186,7 +184,6 @@ async function viewAllByManager() {
           if (err) throw err;
           console.log("----------------------------------------------------");
           console.table(res);
-          console.log("----------------------------------------------------");
           start();
         }
       );
@@ -254,7 +251,68 @@ async function removeEmployee() {
   const result = await employee.remove();
   console.log(result);
   start();
-  id;
+}
+
+async function updateEmployeeRole() {
+  const employees = await getEmployees();
+  const employeeList = employees.map(
+    (el) => el.first_name + " " + el.last_name
+  );
+  const roles = await getRoles();
+  const roleList = roles.map((el) => el.title);
+  const answer = await inquirer.prompt([
+    {
+      name: "employee",
+      type: "list",
+      message: "Select employee to update:",
+      choices: employeeList,
+    },
+    {
+      name: "role",
+      type: "list",
+      message: "Select the new role:",
+      choices: roleList,
+    },
+  ]);
+  const id = employees.find(
+    (el) => el.first_name + " " + el.last_name == answer.employee
+  ).id;
+  const role_id = roles.find((el) => el.title == answer.role).id;
+  employee = new Employee(id, null, null, role_id, null);
+  const result = await employee.updateRole();
+  console.log(result);
+  start();
+}
+
+async function updateEmployeeManager() {
+  const employees = await getEmployees();
+  const employeeList = employees.map(
+    (el) => el.first_name + " " + el.last_name
+  );
+  const answer = await inquirer.prompt([
+    {
+      name: "employee",
+      type: "list",
+      message: "Select employee to update:",
+      choices: employeeList,
+    },
+    {
+      name: "manager",
+      type: "list",
+      message: "Select the new manager:",
+      choices: employeeList,
+    },
+  ]);
+  const id = employees.find(
+    (el) => el.first_name + " " + el.last_name == answer.employee
+  ).id;
+  const manager_id = employees.find(
+    (el) => el.first_name + " " + el.last_name == answer.manager
+  ).id;
+  employee = new Employee(id, null, null, null, manager_id);
+  const result = await employee.updateManager();
+  console.log(result);
+  start();
 }
 
 async function addRole() {
@@ -304,8 +362,6 @@ async function removeRole() {
   console.log(result);
   start();
 }
-
-// Handle departments
 
 async function addDepartment() {
   const answer = await inquirer.prompt([
