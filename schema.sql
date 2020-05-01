@@ -35,15 +35,16 @@ INSERT INTO department (name) VALUES
 ('Sales');
 
 INSERT INTO role (title, salary, department_id) VALUES
-('Sales rep', 1000, 3),
+('CEO', 10000, 1),
+('Workshop manager', 6000, 2),
 ('Sales manager', 4000, 3),
 ('Technician', 2000, 2),
-('Workshop manager', 3000, 1),
-('CEO', 10000, 1);
+('Sales rep', 1000, 3);
+
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES
-('Jerry', 'Tom', 5, 1),
-('John', 'Smith', 4, 1),
-('Dina', 'Ahmed', 2, 1),
-('Sarah', 'Peter', 1, 3),
-('Mohamed', 'Eleraky', 3, 2);
+('John', 'Smith', 1, 1),
+('Jack', 'David', 2, 1),
+('Sarah', 'Peter', 3, 1),
+('Mohamed', 'Zaki', 4, 2),
+('Dina', 'Ahmed', 5, 3);
