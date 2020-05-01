@@ -4,6 +4,25 @@ const Department = require("./lib/Department");
 var mysql = require("mysql");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
+var figlet = require("figlet");
+
+figlet(
+  "Employee\nManagement\nSystem",
+  {
+    font: "big",
+    horizontalLayout: "default",
+    verticalLayout: "default",
+  },
+  function (err, data) {
+    if (err) {
+      console.log("Something went wrong...");
+      console.dir(err);
+      return;
+    }
+    console.log(data);
+    start();
+  }
+);
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -394,5 +413,3 @@ async function removeDepartment() {
   console.log(result);
   start();
 }
-
-start();
